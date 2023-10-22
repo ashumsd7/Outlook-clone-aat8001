@@ -1,11 +1,12 @@
 import React from "react";
 import { formateTime } from "../utils/formatDate";
 
-function EmailCard({ data, onClickMail }) {
+function EmailCard({ data, onClickMail,idx ,selectedMail}) {
   return (
     <div
       onClick={() => {
-        onClickMail(data);
+        if(data.id==selectedMail?.id) {return;}
+        onClickMail(data, idx);
       }}
       className={`flex cursor-pointer hover:shadow-lg gap-4 my-4 bg-gray-300 rounded-lg px-4 text-[#636363] py-2 border border-[#CFD2DC] ${
         !data?.isMarked ? "bg-white" : ""
