@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import EmailCard from "./components/EmailCard";
 import EmailFilter from "./components/EmailFilter";
@@ -16,25 +14,28 @@ import {
 } from "./store/emailSlice";
 import { useDispatch } from "react-redux";
 import store from "./store/store";
-import { data } from "autoprefixer";
+
 
 function App() {
+  // Todo: Can be set as env variable
   const BASE_URL = "https://flipkart-email-mock.now.sh/";
   const [allMails, setAllMails] = useState([]);
   const [selectedMail, setSelectedMail] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState(FILTER_KEYWORDS[0]);
-  const cartItems = useSelector((store) => store.email?.emails);
+  const emails = useSelector((store) => store.email?.emails);
   const dispatch = useDispatch(store);
-  console.log("cartItems", cartItems);
+
 
   const [filteredMails, setFilteredMails] = useState(allMails);
 
+
+  //getting all emails
   useEffect(() => {
     getAllMails();
   }, []);
 
+  // when filter changes
   useEffect(() => {
-  console.log('selectedFilter',selectedFilter)
     setSelectedMail(null)
     let emails = [...allMails];
     if(selectedFilter.value=='unread'){
@@ -52,33 +53,35 @@ function App() {
  
   }, [selectedFilter]);
 
+
+  // get all mails using api
   const getAllMails = () => {
     axios.get(BASE_URL).then((res) => {
-      console.log("red Intent", res.data?.list);
+ 
       const allEmails = { ...res.data?.list };
-      console.log("allEmails", allEmails);
+   
       setAllMails(res.data?.list);
       setFilteredMails(res.data?.list);
       if (allEmails.length > 0) {
         dispatch(setAllMails("ASHu"));
-      } else {
-        console.log(">>>>>>", res.data.list);
       }
     });
   };
 
+
+  // fetch mail details by ID
   const fetchMailDetails = async (data, idx) => {
     const mailDetails = await axios.get(BASE_URL + "?id=" + data?.id);
-    console.log("mailDetails1", { ...mailDetails.data, ...data });
-
+ 
     const allEmails = [...allMails];
     allEmails.splice(idx, 1, { ...data, isRead: true });
     setAllMails(allEmails)
     setFilteredMails(allMails);
-    console.log("{...data,isRead:true}", { ...data, isRead: true });
+ 
     setSelectedMail({ ...mailDetails.data, ...data });
   };
 
+  // when marked as favrt
   const markAsFavorite = (data) => {
     const allEmails = [...allMails];
     const selectedMailIndex = allEmails.findIndex((mail) => mail.id == data.id);
@@ -89,12 +92,11 @@ function App() {
     });
     setSelectedMail({ ...data, isRead: true, isFavorite: true });
     setAllMails(allEmails);
-    console.log("{...data,isRead:true}", {
-      ...data,
-      isRead: true,
-      isFavorite: true,
-    });
+
   };
+
+
+  // JSx
 
   return (
     <div>
