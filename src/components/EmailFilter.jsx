@@ -6,7 +6,7 @@ function EmailFilter({ setFilter, filter }) {
 
   return (
     <div className="flex gap-10 items-center mb-5">
-      <span className="font-medium">Filter By: {FILTER_KEYWORDS.length}</span>
+      <span className="font-medium">Filter By: </span>
       <div className="flex gap-6">
         {FILTER_KEYWORDS.map((data, idx) => {
           return (
