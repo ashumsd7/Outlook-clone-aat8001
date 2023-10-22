@@ -37,7 +37,7 @@ function App() {
         <EmailFilter filter={selectedFilter} setFilter={setSelectedFilter} />
       </div>
       <div className={`p-4 ${selectedMail ? "flex   " : ""}`}>
-        <div className={`flex flex-col ${selectedMail ? "" : ""}`}>
+        <div className={`flex flex-col ${selectedMail ? " h-[80vh] overflow-y-auto min-w-[30%]" : ""}`}>
           {allMails.length == 0 && "No Mails Available"}
           {allMails.length > 0 &&
             allMails.map((data, idx) => {
@@ -58,13 +58,13 @@ function App() {
           }} className="  w-4 h-4 flex justify-center items-center mb-4 p-2 cursor-pointer text-red-400 font-extrabold  bg-gray-200 rounded-lg"> X</button></div>
           <div className=" bg-white border shadow-lg ml-6 rounded-lg pb-10">
             <div className="flex  justify-between items-center px-3">
-              <div className="flex gap-6 mt-6">
+              <div className="flex gap-1 mt-6">
                 <div className="flex justify-between p-6">
                   <div className="h-10 w-10 bg-[#E54065]  flex justify-center capitalize items-center rounded-full text-white font-bolder">
                     {selectedMail?.from?.name.split("")[0]}
                   </div>
                 </div>
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-3">
                   <h3 className="text-4xl font-semibold">
                     {selectedMail?.from?.name}
                   </h3>

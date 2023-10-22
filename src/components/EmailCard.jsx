@@ -12,7 +12,7 @@ function EmailCard({ data, onClickMail }) {
       }`}
     >
       {/* avatar */}
-      <div className="h-10 w-10 bg-[#E54065]  flex justify-center capitalize items-center rounded-full text-white font-bolder">
+      <div className="h-10 min-w-[40px] bg-[#E54065]  flex justify-center capitalize items-center rounded-full text-white font-bolder">
         {data?.from?.name.split("")[0]}
       </div>
       {/* body */}
