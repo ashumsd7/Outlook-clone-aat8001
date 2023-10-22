@@ -35,12 +35,12 @@ function EmailCard({ data, onClickMail,idx ,selectedMail}) {
 
         <p className="mt-2">{data?.short_description} </p>
 
-        {/* time +favrt */}
+        {/* time +isFavorite */}
 
         <div className="flex gap-6 mt-1 ">
           <span>{formateTime(data.date)}</span>
 
-          <span>Favourite</span>
+         {data.isFavorite &&  <span className="text-[#E54065] font-semibold ">Favourite</span>}
         </div>
       </div>
     </div>
