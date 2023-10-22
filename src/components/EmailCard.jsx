@@ -1,12 +1,19 @@
 import React from "react";
 import { formateTime } from "../utils/formatDate";
 
-function EmailCard({ data }) {
+function EmailCard({ data, onClickMail }) {
   return (
-    <div className={`flex gap-4 my-4 bg-gray-300 rounded-lg px-4 text-[#636363] py-2 border border-[#CFD2DC] ${!data?.isMarked ? 'bg-white' : ''}`}>
+    <div
+      onClick={() => {
+        onClickMail(data);
+      }}
+      className={`flex cursor-pointer hover:shadow-lg gap-4 my-4 bg-gray-300 rounded-lg px-4 text-[#636363] py-2 border border-[#CFD2DC] ${
+        !data?.isMarked ? "bg-white" : ""
+      }`}
+    >
       {/* avatar */}
-      <div className="h-10 w-10 bg-[#E54065]  flex justify-center capitalize items-center rounded-full text-white font-bolder" >
-      {data?.from?.name.split('')[0]}
+      <div className="h-10 w-10 bg-[#E54065]  flex justify-center capitalize items-center rounded-full text-white font-bolder">
+        {data?.from?.name.split("")[0]}
       </div>
       {/* body */}
 
@@ -31,7 +38,6 @@ function EmailCard({ data }) {
 
         <div className="flex gap-6 mt-1 ">
           <span>{formateTime(data.date)}</span>
-
 
           <span>Favourite</span>
         </div>
